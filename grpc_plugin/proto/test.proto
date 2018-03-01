@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+
+service MyTest {
+  rpc hello (User) returns (UserInfo) {}
+  rpc hello1 (User) returns (UserInfo) {}
+}
+
+
+message User {
+  int32 id = 1;
+  string name = 2;
+}
+
+
+message UserInfo {
+  string info = 1;
+}
