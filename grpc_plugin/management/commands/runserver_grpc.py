@@ -1,6 +1,5 @@
 from django.core.management import BaseCommand
 from django.conf import settings
-import logging
 from grpc_plugin.autodiscover import (
     autodiscover_grpc,
     autodiscover_grpc_service,
@@ -8,12 +7,26 @@ from grpc_plugin.autodiscover import (
 from concurrent import futures
 import grpc
 import time
+from grpc_plugin.key.get_key import (
+    server_key,
+    server_crt,
+)
 
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
 
 class Command(BaseCommand):
+    def add_arguments(self, parser):
+        parser.add_argument(
+            'addrport', nargs='?',
+            help='Optional port number, or ipaddr:port'
+        )
+        parser.add_argument(
+            '--ssl', '-s', action='store_true', dest='ssl',
+            help='Runserver with ssl',
+        )
+
     def handle(self, **options):
         """
 
@@ -29,10 +42,17 @@ class Command(BaseCommand):
                     continue
                 if issubclass(cls, data.get('class')):
                     data.get('server')(cls(), server)
-        server.add_insecure_port("[::]:50051")
+        addrport = options.get('addrport')
+        addrport = addrport if addrport else '[::]:50051'
+        if options.get('ssl'):
+            server_credentials = grpc.ssl_server_credentials(
+                ((server_key(), server_crt(),),))
+            server.add_secure_port(addrport, server_credentials)
+        else:
+            server.add_insecure_port(addrport)
         server.start()
 
-        print('start grpc server: [::]:50051')
+        print('start grpc server: %s' % addrport)
 
         try:
             while True:
