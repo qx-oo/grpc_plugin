@@ -2,7 +2,7 @@
 
 ### Install:
 
-    $ pip install -e https://github.com/qx-oo/grpc_plugin
+    $ pip install https://github.com/qx-oo/grpc_plugin
 
   django settings.py:
 
