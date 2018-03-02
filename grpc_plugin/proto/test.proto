@@ -3,6 +3,10 @@ syntax = "proto3";
 
 service MyTest {
   rpc hello (User) returns (UserInfo) {}
+}
+
+
+service MyTest1 {
   rpc hello1 (User) returns (UserInfo) {}
 }
 

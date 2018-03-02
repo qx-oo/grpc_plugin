@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='grpc_plugin/proto/test.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n\x1cgrpc_plugin/proto/test.proto\" \n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\"\x18\n\x08UserInfo\x12\x0c\n\x04info\x18\x01 \x01(\t2C\n\x06MyTest\x12\x1b\n\x05hello\x12\x05.User\x1a\t.UserInfo\"\x00\x12\x1c\n\x06hello1\x12\x05.User\x1a\t.UserInfo\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x1cgrpc_plugin/proto/test.proto\" \n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\"\x18\n\x08UserInfo\x12\x0c\n\x04info\x18\x01 \x01(\t2%\n\x06MyTest\x12\x1b\n\x05hello\x12\x05.User\x1a\t.UserInfo\"\x00\x32\'\n\x07MyTest1\x12\x1c\n\x06hello1\x12\x05.User\x1a\t.UserInfo\"\x00\x62\x06proto3')
 )
 
 
@@ -120,7 +120,7 @@ _MYTEST = _descriptor.ServiceDescriptor(
   index=0,
   options=None,
   serialized_start=92,
-  serialized_end=159,
+  serialized_end=129,
   methods=[
   _descriptor.MethodDescriptor(
     name='hello',
@@ -131,18 +131,33 @@ _MYTEST = _descriptor.ServiceDescriptor(
     output_type=_USERINFO,
     options=None,
   ),
+])
+_sym_db.RegisterServiceDescriptor(_MYTEST)
+
+DESCRIPTOR.services_by_name['MyTest'] = _MYTEST
+
+
+_MYTEST1 = _descriptor.ServiceDescriptor(
+  name='MyTest1',
+  full_name='MyTest1',
+  file=DESCRIPTOR,
+  index=1,
+  options=None,
+  serialized_start=131,
+  serialized_end=170,
+  methods=[
   _descriptor.MethodDescriptor(
     name='hello1',
-    full_name='MyTest.hello1',
-    index=1,
+    full_name='MyTest1.hello1',
+    index=0,
     containing_service=None,
     input_type=_USER,
     output_type=_USERINFO,
     options=None,
   ),
 ])
-_sym_db.RegisterServiceDescriptor(_MYTEST)
+_sym_db.RegisterServiceDescriptor(_MYTEST1)
 
-DESCRIPTOR.services_by_name['MyTest'] = _MYTEST
+DESCRIPTOR.services_by_name['MyTest1'] = _MYTEST1
 
 # @@protoc_insertion_point(module_scope)

@@ -19,11 +19,6 @@ class MyTestStub(object):
         request_serializer=grpc__plugin_dot_proto_dot_test__pb2.User.SerializeToString,
         response_deserializer=grpc__plugin_dot_proto_dot_test__pb2.UserInfo.FromString,
         )
-    self.hello1 = channel.unary_unary(
-        '/MyTest/hello1',
-        request_serializer=grpc__plugin_dot_proto_dot_test__pb2.User.SerializeToString,
-        response_deserializer=grpc__plugin_dot_proto_dot_test__pb2.UserInfo.FromString,
-        )
 
 
 class MyTestServicer(object):
@@ -31,13 +26,6 @@ class MyTestServicer(object):
   pass
 
   def hello(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def hello1(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -52,6 +40,43 @@ def add_MyTestServicer_to_server(servicer, server):
           request_deserializer=grpc__plugin_dot_proto_dot_test__pb2.User.FromString,
           response_serializer=grpc__plugin_dot_proto_dot_test__pb2.UserInfo.SerializeToString,
       ),
+  }
+  generic_handler = grpc.method_handlers_generic_handler(
+      'MyTest', rpc_method_handlers)
+  server.add_generic_rpc_handlers((generic_handler,))
+
+
+class MyTest1Stub(object):
+  # missing associated documentation comment in .proto file
+  pass
+
+  def __init__(self, channel):
+    """Constructor.
+
+    Args:
+      channel: A grpc.Channel.
+    """
+    self.hello1 = channel.unary_unary(
+        '/MyTest1/hello1',
+        request_serializer=grpc__plugin_dot_proto_dot_test__pb2.User.SerializeToString,
+        response_deserializer=grpc__plugin_dot_proto_dot_test__pb2.UserInfo.FromString,
+        )
+
+
+class MyTest1Servicer(object):
+  # missing associated documentation comment in .proto file
+  pass
+
+  def hello1(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+
+def add_MyTest1Servicer_to_server(servicer, server):
+  rpc_method_handlers = {
       'hello1': grpc.unary_unary_rpc_method_handler(
           servicer.hello1,
           request_deserializer=grpc__plugin_dot_proto_dot_test__pb2.User.FromString,
@@ -59,5 +84,5 @@ def add_MyTestServicer_to_server(servicer, server):
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
-      'MyTest', rpc_method_handlers)
+      'MyTest1', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))
