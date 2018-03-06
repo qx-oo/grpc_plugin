@@ -11,6 +11,18 @@ from grpc_plugin.key.get_key import (
     server_key,
     server_crt,
 )
+import logging
+import sys
+
+
+log = logging.getLogger()
+log.setLevel(logging.DEBUG)
+
+ch = logging.StreamHandler(sys.stdout)
+ch.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+ch.setFormatter(formatter)
+log.addHandler(ch)
 
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
