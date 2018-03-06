@@ -1,5 +1,7 @@
 # Django Grpc Plugin
 
+require: python3.5+
+
 ### Install:
 
     $ pip install git+https://github.com/qx-oo/grpc_plugin
