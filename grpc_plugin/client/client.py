@@ -1,4 +1,4 @@
-from key import get_key
+from grpc_plugin.key import get_key
 import grpc
 
 
