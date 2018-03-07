@@ -1,6 +1,6 @@
 import inspect
 import os
-import grpc_plugin.proto
+from . import proto
 import importlib
 import re
 
@@ -30,12 +30,12 @@ def autodiscover_grpc_service():
     """
     p = re.compile('add_([\w|\d]*)_to_server')
 
-    file_list = os.listdir(grpc_plugin.proto.__path__[0])
+    file_list = os.listdir(proto.__path__[0])
     grpc_list = [fl[:-3] for fl in file_list if fl.endswith('grpc.py')]
 
     module_data = {}
     for grpc_f in grpc_list:
-        module = importlib.import_module('%s.%s' % (grpc_plugin.proto.__name__,
+        module = importlib.import_module('%s.%s' % (proto.__name__,
                                                     grpc_f))
 
         for name, obj in inspect.getmembers(module):
