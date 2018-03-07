@@ -64,7 +64,7 @@ class Command(BaseCommand):
             server.add_insecure_port(addrport)
         server.start()
 
-        print('start grpc server: %s' % addrport)
+        log.info('start grpc server: %s' % addrport)
 
         try:
             while True:
