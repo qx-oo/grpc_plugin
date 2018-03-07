@@ -13,6 +13,7 @@ from grpc_plugin.key.get_key import (
 )
 import logging
 import sys
+from grpc_plugin.interceptor import RequestInterceptor
 
 
 log = logging.getLogger()
@@ -45,7 +46,12 @@ class Command(BaseCommand):
         """
         installed_apps = settings.INSTALLED_APPS
 
-        server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+        interceptors = (
+            RequestInterceptor(),
+        )
+
+        server = grpc.server(futures.ThreadPoolExecutor(max_workers=10),
+                             interceptors=interceptors)
 
         service_data = autodiscover_grpc_service()
         for cls in autodiscover_grpc(installed_apps):

@@ -31,7 +31,7 @@ create grpc_view.py in app path:
 
 python type mapping:
 
-proto	| python |	描述
+proto	| python | description
 ---|---|---
 double | float |
 float | float |
@@ -42,8 +42,8 @@ unit32 | int | 变长编码.
 unit64 | int | 变长编码.
 sint32 | int | 变长编码，数值有符号，负数编码效率低于int32
 sint64 | int | 变长编码，数值有符号，负数编码效率低于int64
-fixed32 | int | 固定4byte， 如果数值经常大于2的28次方的话效率高于uint32
-fixed64 | int | 固定4byte， 如果数值经常大于2的56次方的话效率高于uint64
+fixed32 | int | 固定4byte， 如果数值经常大于2的28次方的话效率高于uint32
+fixed64 | int | 固定4byte， 如果数值经常大于2的56次方的话效率高于uint64
 sfixed32 | int | 固定4byte
 sfixed64 | int | 固定8byte
 string | string | 字符串内容应该是 UTF-8 编码或者7-bit ASCII 文本.
