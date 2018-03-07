@@ -13,7 +13,7 @@ class RequestInterceptor(grpc.ServerInterceptor):
         header = dict(handler_call_details.invocation_metadata)
         method = handler_call_details.method
         host = header.get('host', '')
-        log.info('%s - %s' % (host, method))
+        log.info('%s "%s"' % (host, method))
         ret = continuation(handler_call_details)
         return ret
 
