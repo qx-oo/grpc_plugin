@@ -1,4 +1,5 @@
 from setuptools import setup
+from setuptools import find_packages
 
 
 setup(name='grpc_plugin',
@@ -8,7 +9,7 @@ setup(name='grpc_plugin',
       author='Shawn',
       author_email='q-x64@live.com',
       license='',
-      packages=['grpc_plugin'],
+      packages=find_packages(),
       install_requires=[
           'grpcio==1.9.1'
       ],
