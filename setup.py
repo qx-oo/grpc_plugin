@@ -9,7 +9,7 @@ setup(name='grpc_plugin',
       author='Shawn',
       author_email='q-x64@live.com',
       license='',
-      packages=find_packages(),
+      packages=find_packages(exclude=['example*']),
       install_requires=[
           'grpcio==1.9.1'
       ],
