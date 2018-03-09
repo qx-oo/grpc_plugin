@@ -16,10 +16,17 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from mytest.views import hello, hello1
+from mytest.views import (
+    hello,
+    hello_request_stream,
+    hello_response_stream,
+    hello_request_response_stream,
+    )
 
 urlpatterns = [
     url(r'^hello/', hello),
-    url(r'^hello1/', hello1),
+    url(r'^hello_request/', hello_request_stream),
+    url(r'^hello_response/', hello_response_stream),
+    url(r'^hello_request_response/', hello_request_response_stream),
     url(r'^admin/', admin.site.urls),
 ]

@@ -2,12 +2,17 @@ syntax = "proto3";
 
 
 service YourTest {
-  rpc hello (User) returns (UserInfo) {}
+  rpc hello (stream User) returns (UserInfo) {}
 }
 
 
 service YourTest1 {
-  rpc hello1 (User) returns (UserInfo) {}
+  rpc hello (User) returns (stream UserInfo) {}
+}
+
+
+service YourTest2 {
+  rpc hello (stream User) returns (stream UserInfo) {}
 }
 
 

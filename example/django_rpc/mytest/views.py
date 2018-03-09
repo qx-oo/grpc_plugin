@@ -1,5 +1,5 @@
-from django.shortcuts import render
 from django.http import HttpResponse
+import json
 from grpc_plugin.client import client_channel
 from test_proto.proto import (
     test_pb2,
@@ -18,8 +18,46 @@ def hello(request):
     return HttpResponse(response.info)
 
 
-def hello1(request):
+def _user_list(user_list):
+    for user in user_list:
+        yield user
+
+
+def hello_request_stream(request):
     channel = client_channel("localhost:50051")
     client = proto1_test_pb2_grpc.YourTestStub(channel)
-    response = client.hello(proto1_test_pb2.User(id=10, name='test'))
+
+    user_list = [
+        proto1_test_pb2.User(id=i, name='test%s' % i)
+        for i in range(10)
+    ]
+    response = client.hello(_user_list(user_list))
     return HttpResponse(response.info)
+
+
+def hello_response_stream(request):
+    channel = client_channel("localhost:50051")
+    client = proto1_test_pb2_grpc.YourTest1Stub(channel)
+    response = client.hello(proto1_test_pb2.User(id=1, name='test'))
+
+    info = [
+        user_info.info
+        for user_info in response
+    ]
+    return HttpResponse(json.dumps(info))
+
+
+def hello_request_response_stream(request):
+    channel = client_channel("localhost:50051")
+    client = proto1_test_pb2_grpc.YourTest2Stub(channel)
+    user_list = [
+        proto1_test_pb2.User(id=i, name='test%s' % i)
+        for i in range(10)
+    ]
+    response = client.hello(_user_list(user_list))
+
+    info = [
+        user_info.info
+        for user_info in response
+    ]
+    return HttpResponse(json.dumps(info))

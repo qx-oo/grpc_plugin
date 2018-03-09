@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='test_proto1/proto/test.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n\x1ctest_proto1/proto/test.proto\" \n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\"\x18\n\x08UserInfo\x12\x0c\n\x04info\x18\x01 \x01(\t2\'\n\x08YourTest\x12\x1b\n\x05hello\x12\x05.User\x1a\t.UserInfo\"\x00\x32)\n\tYourTest1\x12\x1c\n\x06hello1\x12\x05.User\x1a\t.UserInfo\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x1ctest_proto1/proto/test.proto\" \n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\"\x18\n\x08UserInfo\x12\x0c\n\x04info\x18\x01 \x01(\t2)\n\x08YourTest\x12\x1d\n\x05hello\x12\x05.User\x1a\t.UserInfo\"\x00(\x01\x32*\n\tYourTest1\x12\x1d\n\x05hello\x12\x05.User\x1a\t.UserInfo\"\x00\x30\x01\x32,\n\tYourTest2\x12\x1f\n\x05hello\x12\x05.User\x1a\t.UserInfo\"\x00(\x01\x30\x01\x62\x06proto3')
 )
 
 
@@ -120,7 +120,7 @@ _YOURTEST = _descriptor.ServiceDescriptor(
   index=0,
   options=None,
   serialized_start=92,
-  serialized_end=131,
+  serialized_end=133,
   methods=[
   _descriptor.MethodDescriptor(
     name='hello',
@@ -143,12 +143,12 @@ _YOURTEST1 = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   options=None,
-  serialized_start=133,
-  serialized_end=174,
+  serialized_start=135,
+  serialized_end=177,
   methods=[
   _descriptor.MethodDescriptor(
-    name='hello1',
-    full_name='YourTest1.hello1',
+    name='hello',
+    full_name='YourTest1.hello',
     index=0,
     containing_service=None,
     input_type=_USER,
@@ -159,5 +159,29 @@ _YOURTEST1 = _descriptor.ServiceDescriptor(
 _sym_db.RegisterServiceDescriptor(_YOURTEST1)
 
 DESCRIPTOR.services_by_name['YourTest1'] = _YOURTEST1
+
+
+_YOURTEST2 = _descriptor.ServiceDescriptor(
+  name='YourTest2',
+  full_name='YourTest2',
+  file=DESCRIPTOR,
+  index=2,
+  options=None,
+  serialized_start=179,
+  serialized_end=223,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='hello',
+    full_name='YourTest2.hello',
+    index=0,
+    containing_service=None,
+    input_type=_USER,
+    output_type=_USERINFO,
+    options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_YOURTEST2)
+
+DESCRIPTOR.services_by_name['YourTest2'] = _YOURTEST2
 
 # @@protoc_insertion_point(module_scope)

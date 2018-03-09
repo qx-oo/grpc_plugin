@@ -14,7 +14,7 @@ class YourTestStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.hello = channel.unary_unary(
+    self.hello = channel.stream_unary(
         '/YourTest/hello',
         request_serializer=test__proto1_dot_proto_dot_test__pb2.User.SerializeToString,
         response_deserializer=test__proto1_dot_proto_dot_test__pb2.UserInfo.FromString,
@@ -25,7 +25,7 @@ class YourTestServicer(object):
   # missing associated documentation comment in .proto file
   pass
 
-  def hello(self, request, context):
+  def hello(self, request_iterator, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -35,7 +35,7 @@ class YourTestServicer(object):
 
 def add_YourTestServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'hello': grpc.unary_unary_rpc_method_handler(
+      'hello': grpc.stream_unary_rpc_method_handler(
           servicer.hello,
           request_deserializer=test__proto1_dot_proto_dot_test__pb2.User.FromString,
           response_serializer=test__proto1_dot_proto_dot_test__pb2.UserInfo.SerializeToString,
@@ -56,8 +56,8 @@ class YourTest1Stub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.hello1 = channel.unary_unary(
-        '/YourTest1/hello1',
+    self.hello = channel.unary_stream(
+        '/YourTest1/hello',
         request_serializer=test__proto1_dot_proto_dot_test__pb2.User.SerializeToString,
         response_deserializer=test__proto1_dot_proto_dot_test__pb2.UserInfo.FromString,
         )
@@ -67,7 +67,7 @@ class YourTest1Servicer(object):
   # missing associated documentation comment in .proto file
   pass
 
-  def hello1(self, request, context):
+  def hello(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -77,12 +77,54 @@ class YourTest1Servicer(object):
 
 def add_YourTest1Servicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'hello1': grpc.unary_unary_rpc_method_handler(
-          servicer.hello1,
+      'hello': grpc.unary_stream_rpc_method_handler(
+          servicer.hello,
           request_deserializer=test__proto1_dot_proto_dot_test__pb2.User.FromString,
           response_serializer=test__proto1_dot_proto_dot_test__pb2.UserInfo.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
       'YourTest1', rpc_method_handlers)
+  server.add_generic_rpc_handlers((generic_handler,))
+
+
+class YourTest2Stub(object):
+  # missing associated documentation comment in .proto file
+  pass
+
+  def __init__(self, channel):
+    """Constructor.
+
+    Args:
+      channel: A grpc.Channel.
+    """
+    self.hello = channel.stream_stream(
+        '/YourTest2/hello',
+        request_serializer=test__proto1_dot_proto_dot_test__pb2.User.SerializeToString,
+        response_deserializer=test__proto1_dot_proto_dot_test__pb2.UserInfo.FromString,
+        )
+
+
+class YourTest2Servicer(object):
+  # missing associated documentation comment in .proto file
+  pass
+
+  def hello(self, request_iterator, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+
+def add_YourTest2Servicer_to_server(servicer, server):
+  rpc_method_handlers = {
+      'hello': grpc.stream_stream_rpc_method_handler(
+          servicer.hello,
+          request_deserializer=test__proto1_dot_proto_dot_test__pb2.User.FromString,
+          response_serializer=test__proto1_dot_proto_dot_test__pb2.UserInfo.SerializeToString,
+      ),
+  }
+  generic_handler = grpc.method_handlers_generic_handler(
+      'YourTest2', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))
