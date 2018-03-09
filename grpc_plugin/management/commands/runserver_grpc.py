@@ -60,7 +60,7 @@ class Command(BaseCommand):
                 if not data.get('class') or not data.get('server'):
                     continue
                 if issubclass(cls, data.get('class')):
-                    log.info('rpc: %s' % (cls.__module__))
+                    log.info('rpc: %s.%s' % (cls.__module__, cls.__name__))
                     data.get('server')(cls(), server)
         addrport = options.get('addrport')
         addrport = addrport if addrport else '[::]:50051'
