@@ -19,8 +19,18 @@ django settings.py:
     INSTALLED_APPS = [
         'test',
         'grpc_plugin',
+        'test_proto',
         ...
     ]
+
+create 'test_proto' app:
+
+    project:
+        - test_proto:
+            - __init__.py
+            - proto:
+                - __init__.py
+                - test.proto
 
 create grpc_view.py in app path:
 

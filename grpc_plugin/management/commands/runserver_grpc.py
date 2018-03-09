@@ -54,12 +54,13 @@ class Command(BaseCommand):
         server = grpc.server(futures.ThreadPoolExecutor(max_workers=10),
                              interceptors=interceptors)
 
-        service_data = autodiscover_grpc_service()
+        service_data = autodiscover_grpc_service(installed_apps)
         for cls in autodiscover_grpc(installed_apps):
             for _, data in service_data.items():
                 if not data.get('class') or not data.get('server'):
                     continue
                 if issubclass(cls, data.get('class')):
+                    log.info('rpc: %s' % (cls.__module__))
                     data.get('server')(cls(), server)
         addrport = options.get('addrport')
         addrport = addrport if addrport else '[::]:50051'
