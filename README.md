@@ -4,7 +4,7 @@ require: python3.5+
 
 ### Install:
 
-    $ pip install git+https://github.com/qx-oo/grpc_plugin
+    $ pip install git+git@git.jian24.com:commerce/grpc_plugin.git
 
 ### Run:
 
