@@ -15,7 +15,7 @@ def autodiscover_grpc(installed_apps):
     for app in installed_apps:
         try:
             module = importlib.import_module('.'.join([app, 'grpc_view']))
-        except ModuleNotFoundError:
+        except ImportError:
             continue
         for name, obj in inspect.getmembers(module):
             if inspect.isclass(obj):
