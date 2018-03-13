@@ -21,6 +21,7 @@ from mytest.views import (
     hello_request_stream,
     hello_response_stream,
     hello_request_response_stream,
+    hello_list,
     )
 
 urlpatterns = [
@@ -28,5 +29,6 @@ urlpatterns = [
     url(r'^hello_request/', hello_request_stream),
     url(r'^hello_response/', hello_response_stream),
     url(r'^hello_request_response/', hello_request_response_stream),
+    url(r'^hello_list/', hello_list),
     url(r'^admin/', admin.site.urls),
 ]

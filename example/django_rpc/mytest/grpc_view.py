@@ -4,6 +4,7 @@ from test_proto1.proto.test_pb2_grpc import (
     YourTestServicer,
     YourTest1Servicer,
     YourTest2Servicer,
+    YourTest3Servicer,
     )
 from test_proto1.proto import test_pb2 as proto1_test_pb2
 import logging
@@ -44,3 +45,16 @@ class YourTest2ServicerImp(YourTest2Servicer):
         for user in request_iterator:
             yield proto1_test_pb2.UserInfo(info="%s, %s" % (user.id,
                                                             user.name))
+
+
+class YourTest3ServicerImp(YourTest3Servicer):
+
+    def hello(self, request, context):
+        log.info('YourTest3ServicerImp')
+        log.info('YourTest3ServicerImp: %s, %s' % (request.no_data,
+                                                   request.desc))
+        userinfo_list = [
+            proto1_test_pb2.UserInfo(info="%s, %s" % (user.id, user.name))
+            for user in request.user_list
+        ]
+        return proto1_test_pb2.AllUserInfo(userinfo_list=userinfo_list)

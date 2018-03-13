@@ -61,3 +61,19 @@ def hello_request_response_stream(request):
         for user_info in response
     ]
     return HttpResponse(json.dumps(info))
+
+
+def hello_list(request):
+    channel = client_channel("localhost:50051")
+    client = proto1_test_pb2_grpc.YourTest3Stub(channel)
+    user_list = [
+        proto1_test_pb2.User(id=i, name='test%s' % i)
+        for i in range(10)
+    ]
+    response = client.hello(proto1_test_pb2.AllUser(user_list=user_list,
+                                                    desc='123'))
+    info = [
+        user_info.info
+        for user_info in response.userinfo_list
+    ]
+    return HttpResponse(json.dumps(info))

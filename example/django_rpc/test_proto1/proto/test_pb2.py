@@ -17,30 +17,106 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='test_proto1/proto/test.proto',
-  package='',
+  package='test1',
   syntax='proto3',
-  serialized_pb=_b('\n\x1ctest_proto1/proto/test.proto\" \n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\"\x18\n\x08UserInfo\x12\x0c\n\x04info\x18\x01 \x01(\t2)\n\x08YourTest\x12\x1d\n\x05hello\x12\x05.User\x1a\t.UserInfo\"\x00(\x01\x32*\n\tYourTest1\x12\x1d\n\x05hello\x12\x05.User\x1a\t.UserInfo\"\x00\x30\x01\x32,\n\tYourTest2\x12\x1f\n\x05hello\x12\x05.User\x1a\t.UserInfo\"\x00(\x01\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x1ctest_proto1/proto/test.proto\x12\x05test1\"H\n\x07\x41llUser\x12\x1e\n\tuser_list\x18\x01 \x03(\x0b\x32\x0b.test1.User\x12\x0f\n\x07no_data\x18\x02 \x01(\x05\x12\x0c\n\x04\x64\x65sc\x18\x03 \x01(\t\"5\n\x0b\x41llUserInfo\x12&\n\ruserinfo_list\x18\x01 \x03(\x0b\x32\x0f.test1.UserInfo\" \n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\"\x18\n\x08UserInfo\x12\x0c\n\x04info\x18\x01 \x01(\t25\n\x08YourTest\x12)\n\x05hello\x12\x0b.test1.User\x1a\x0f.test1.UserInfo\"\x00(\x01\x32\x36\n\tYourTest1\x12)\n\x05hello\x12\x0b.test1.User\x1a\x0f.test1.UserInfo\"\x00\x30\x01\x32\x38\n\tYourTest2\x12+\n\x05hello\x12\x0b.test1.User\x1a\x0f.test1.UserInfo\"\x00(\x01\x30\x01\x32:\n\tYourTest3\x12-\n\x05hello\x12\x0e.test1.AllUser\x1a\x12.test1.AllUserInfo\"\x00\x62\x06proto3')
 )
 
 
 
 
-_USER = _descriptor.Descriptor(
-  name='User',
-  full_name='User',
+_ALLUSER = _descriptor.Descriptor(
+  name='AllUser',
+  full_name='test1.AllUser',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='User.id', index=0,
+      name='user_list', full_name='test1.AllUser.user_list', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='no_data', full_name='test1.AllUser.no_data', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='desc', full_name='test1.AllUser.desc', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=39,
+  serialized_end=111,
+)
+
+
+_ALLUSERINFO = _descriptor.Descriptor(
+  name='AllUserInfo',
+  full_name='test1.AllUserInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='userinfo_list', full_name='test1.AllUserInfo.userinfo_list', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=113,
+  serialized_end=166,
+)
+
+
+_USER = _descriptor.Descriptor(
+  name='User',
+  full_name='test1.User',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='test1.User.id', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='name', full_name='User.name', index=1,
+      name='name', full_name='test1.User.name', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -58,20 +134,20 @@ _USER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=32,
-  serialized_end=64,
+  serialized_start=168,
+  serialized_end=200,
 )
 
 
 _USERINFO = _descriptor.Descriptor(
   name='UserInfo',
-  full_name='UserInfo',
+  full_name='test1.UserInfo',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='info', full_name='UserInfo.info', index=0,
+      name='info', full_name='test1.UserInfo.info', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -89,25 +165,43 @@ _USERINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=66,
-  serialized_end=90,
+  serialized_start=202,
+  serialized_end=226,
 )
 
+_ALLUSER.fields_by_name['user_list'].message_type = _USER
+_ALLUSERINFO.fields_by_name['userinfo_list'].message_type = _USERINFO
+DESCRIPTOR.message_types_by_name['AllUser'] = _ALLUSER
+DESCRIPTOR.message_types_by_name['AllUserInfo'] = _ALLUSERINFO
 DESCRIPTOR.message_types_by_name['User'] = _USER
 DESCRIPTOR.message_types_by_name['UserInfo'] = _USERINFO
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
+AllUser = _reflection.GeneratedProtocolMessageType('AllUser', (_message.Message,), dict(
+  DESCRIPTOR = _ALLUSER,
+  __module__ = 'test_proto1.proto.test_pb2'
+  # @@protoc_insertion_point(class_scope:test1.AllUser)
+  ))
+_sym_db.RegisterMessage(AllUser)
+
+AllUserInfo = _reflection.GeneratedProtocolMessageType('AllUserInfo', (_message.Message,), dict(
+  DESCRIPTOR = _ALLUSERINFO,
+  __module__ = 'test_proto1.proto.test_pb2'
+  # @@protoc_insertion_point(class_scope:test1.AllUserInfo)
+  ))
+_sym_db.RegisterMessage(AllUserInfo)
+
 User = _reflection.GeneratedProtocolMessageType('User', (_message.Message,), dict(
   DESCRIPTOR = _USER,
   __module__ = 'test_proto1.proto.test_pb2'
-  # @@protoc_insertion_point(class_scope:User)
+  # @@protoc_insertion_point(class_scope:test1.User)
   ))
 _sym_db.RegisterMessage(User)
 
 UserInfo = _reflection.GeneratedProtocolMessageType('UserInfo', (_message.Message,), dict(
   DESCRIPTOR = _USERINFO,
   __module__ = 'test_proto1.proto.test_pb2'
-  # @@protoc_insertion_point(class_scope:UserInfo)
+  # @@protoc_insertion_point(class_scope:test1.UserInfo)
   ))
 _sym_db.RegisterMessage(UserInfo)
 
@@ -115,16 +209,16 @@ _sym_db.RegisterMessage(UserInfo)
 
 _YOURTEST = _descriptor.ServiceDescriptor(
   name='YourTest',
-  full_name='YourTest',
+  full_name='test1.YourTest',
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=92,
-  serialized_end=133,
+  serialized_start=228,
+  serialized_end=281,
   methods=[
   _descriptor.MethodDescriptor(
     name='hello',
-    full_name='YourTest.hello',
+    full_name='test1.YourTest.hello',
     index=0,
     containing_service=None,
     input_type=_USER,
@@ -139,16 +233,16 @@ DESCRIPTOR.services_by_name['YourTest'] = _YOURTEST
 
 _YOURTEST1 = _descriptor.ServiceDescriptor(
   name='YourTest1',
-  full_name='YourTest1',
+  full_name='test1.YourTest1',
   file=DESCRIPTOR,
   index=1,
   options=None,
-  serialized_start=135,
-  serialized_end=177,
+  serialized_start=283,
+  serialized_end=337,
   methods=[
   _descriptor.MethodDescriptor(
     name='hello',
-    full_name='YourTest1.hello',
+    full_name='test1.YourTest1.hello',
     index=0,
     containing_service=None,
     input_type=_USER,
@@ -163,16 +257,16 @@ DESCRIPTOR.services_by_name['YourTest1'] = _YOURTEST1
 
 _YOURTEST2 = _descriptor.ServiceDescriptor(
   name='YourTest2',
-  full_name='YourTest2',
+  full_name='test1.YourTest2',
   file=DESCRIPTOR,
   index=2,
   options=None,
-  serialized_start=179,
-  serialized_end=223,
+  serialized_start=339,
+  serialized_end=395,
   methods=[
   _descriptor.MethodDescriptor(
     name='hello',
-    full_name='YourTest2.hello',
+    full_name='test1.YourTest2.hello',
     index=0,
     containing_service=None,
     input_type=_USER,
@@ -183,5 +277,29 @@ _YOURTEST2 = _descriptor.ServiceDescriptor(
 _sym_db.RegisterServiceDescriptor(_YOURTEST2)
 
 DESCRIPTOR.services_by_name['YourTest2'] = _YOURTEST2
+
+
+_YOURTEST3 = _descriptor.ServiceDescriptor(
+  name='YourTest3',
+  full_name='test1.YourTest3',
+  file=DESCRIPTOR,
+  index=3,
+  options=None,
+  serialized_start=397,
+  serialized_end=455,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='hello',
+    full_name='test1.YourTest3.hello',
+    index=0,
+    containing_service=None,
+    input_type=_ALLUSER,
+    output_type=_ALLUSERINFO,
+    options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_YOURTEST3)
+
+DESCRIPTOR.services_by_name['YourTest3'] = _YOURTEST3
 
 # @@protoc_insertion_point(module_scope)

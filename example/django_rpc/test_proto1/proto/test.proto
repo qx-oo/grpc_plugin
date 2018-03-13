@@ -1,6 +1,9 @@
 syntax = "proto3";
 
 
+package test1;
+
+
 service YourTest {
   rpc hello (stream User) returns (UserInfo) {}
 }
@@ -16,6 +19,23 @@ service YourTest2 {
 }
 
 
+service YourTest3 {
+  rpc hello (AllUser) returns (AllUserInfo) {}
+}
+
+
+message AllUser {
+  repeated User user_list = 1;
+  int32 no_data = 2;
+  string desc = 3;
+}
+
+
+message AllUserInfo {
+  repeated UserInfo userinfo_list = 1;
+}
+
+
 message User {
   int32 id = 1;
   string name = 2;
@@ -25,3 +45,4 @@ message User {
 message UserInfo {
   string info = 1;
 }
+
