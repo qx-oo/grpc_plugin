@@ -56,7 +56,7 @@ def autodiscover_grpc_service(installed_apps):
     for app in installed_apps:
         try:
             module = importlib.import_module('.'.join([app, 'proto']))
-        except ModuleNotFoundError:
+        except ImportError:
             continue
         _get_module_data(module)
 
