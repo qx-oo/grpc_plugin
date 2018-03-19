@@ -1,4 +1,7 @@
-from google.protobuf.pyext._message import RepeatedScalarContainer
+from google.protobuf.pyext._message import (
+    RepeatedScalarContainer,
+    RepeatedCompositeContainer,
+    )
 
 
 def message_to_json(message):
@@ -11,7 +14,8 @@ def message_to_json(message):
         value = getattr(message, field_alias)
         if type(value) in [float, bool, int, str]:
             data[field_alias] = value
-        elif type(value) == RepeatedScalarContainer:
+        elif type(value) in [RepeatedScalarContainer,
+                             RepeatedCompositeContainer]:
             value_list = []
             for val in value:
                 if type(val) in [float, bool, int, str]:
