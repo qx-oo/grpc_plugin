@@ -2,14 +2,24 @@ import grpc
 from . import generic_client_interceptor
 import collections
 import logging
+from threading import local
 
 
 log = logging.getLogger()
 
 
+def close_old_connections():
+    """检查关闭django不可用连接"""
+    connections = local()
+    if hasattr(connections, 'default'):
+        conn = getattr(connections, 'default')
+        conn.close_if_unusable_or_obsolete()
+
+
 class RequestInterceptor(grpc.ServerInterceptor):
 
     def intercept_service(self, continuation, handler_call_details):
+        close_old_connections()
         header = dict(handler_call_details.invocation_metadata)
         method = handler_call_details.method
         host = header.get('host', '')
