@@ -1,5 +1,6 @@
 from django.core.management import BaseCommand
 from django.conf import settings
+from django.db import connections
 from grpc_plugin.autodiscover import (
     autodiscover_grpc,
     autodiscover_grpc_service,
@@ -30,6 +31,12 @@ log.addHandler(ch)
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
 
+def close_old_connections():
+    """检查关闭django不可用连接"""
+    for conn in connections.all():
+        conn.close_if_unusable_or_obsolete()
+
+
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
@@ -48,7 +55,7 @@ class Command(BaseCommand):
         installed_apps = settings.INSTALLED_APPS
 
         interceptors = (
-            RequestInterceptor(),
+            RequestInterceptor(close_old_connections=close_old_connections),
         )
 
         server = grpc.server(futures.ThreadPoolExecutor(max_workers=10),
