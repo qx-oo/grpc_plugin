@@ -70,3 +70,7 @@ enum:
             POS = 3;
         }
     }
+
+### Notification
+
+如果mysql server重启，需要重启django grpc server，否则第一次请求出现mysql has gone away
