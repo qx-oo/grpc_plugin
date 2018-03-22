@@ -43,11 +43,13 @@ client:
 
     from grpc_plugin.client import client_channel
     from test_proto.proto import test_pb2, test_pb2_grpc
+    from grpc_plugin.utils import message_to_json
 
     channel = client_channel("localhost:50051")
     client = test_pb2_grpc.MyTestStub(channel)
     response = client.hello(test_pb2.User(id=10, name='test'))
     print(response.info)
+    print('json: ', message_to_json(response))
 
 python type mapping:
 
