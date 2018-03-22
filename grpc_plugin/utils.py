@@ -5,6 +5,11 @@ from google.protobuf.pyext._message import (
 
 
 def message_to_json(message):
+    """
+    Convert Message data to json
+    ---
+        message: Grpc Message Object
+    """
     data = {}
     for field_name in dir(message):
         if not field_name.endswith('_FIELD_NUMBER'):

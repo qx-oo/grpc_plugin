@@ -6,6 +6,7 @@ import socket
 
 def client_channel(addrport, ssl=False):
     """
+    Get client grpc channel
     """
     def _add_header(channel, key, value):
         header_adder_interceptor = interceptor\

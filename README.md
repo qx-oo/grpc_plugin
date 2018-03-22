@@ -39,6 +39,16 @@ create grpc_view.py in app path:
         def hello(self, request, content):
             return test_pb2.UserInfo(info="%s, %s" % (request.id, request.name))
 
+client:
+
+    from grpc_plugin.client import client_channel
+    from test_proto.proto import test_pb2, test_pb2_grpc
+
+    channel = client_channel("localhost:50051")
+    client = test_pb2_grpc.MyTestStub(channel)
+    response = client.hello(test_pb2.User(id=10, name='test'))
+    print(response.info)
+
 python type mapping:
 
 proto	| python | description
