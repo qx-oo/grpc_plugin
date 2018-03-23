@@ -9,15 +9,7 @@ log = logging.getLogger()
 
 class RequestInterceptor(grpc.ServerInterceptor):
 
-    def __init__(self, close_old_connections=None):
-        if callable(close_old_connections):
-            self.close_old_connections = close_old_connections
-        else:
-            self.close_old_connections = None
-
     def intercept_service(self, continuation, handler_call_details):
-        if self.close_old_connections:
-            self.close_old_connections()
         header = dict(handler_call_details.invocation_metadata)
         method = handler_call_details.method
         host = header.get('host', '')

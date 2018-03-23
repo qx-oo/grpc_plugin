@@ -1,6 +1,5 @@
 from django.core.management import BaseCommand
 from django.conf import settings
-from django.db import connections
 from grpc_plugin.autodiscover import (
     autodiscover_grpc,
     autodiscover_grpc_service,
@@ -31,10 +30,15 @@ log.addHandler(ch)
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
 
-def close_old_connections():
+def close_old_connections(func):
     """检查关闭django不可用连接"""
-    for conn in connections.all():
-        conn.close_if_unusable_or_obsolete()
+    from django.db import connections
+
+    def wrapper(*args):
+        for conn in connections.all():
+            conn.close_if_unusable_or_obsolete()
+        return func(*args)
+    return wrapper
 
 
 class Command(BaseCommand):
@@ -47,6 +51,10 @@ class Command(BaseCommand):
             '--ssl', '-s', action='store_true', dest='ssl',
             help='Runserver with ssl',
         )
+        parser.add_argument(
+            '--worker', '-w', action='store', dest='workers',
+            type=int, default=4, help='Thread workers, default 4 worker',
+        )
 
     def handle(self, **options):
         """
@@ -55,10 +63,11 @@ class Command(BaseCommand):
         installed_apps = settings.INSTALLED_APPS
 
         interceptors = (
-            RequestInterceptor(close_old_connections=close_old_connections),
+            RequestInterceptor(),
         )
 
-        server = grpc.server(futures.ThreadPoolExecutor(max_workers=10),
+        workers = options.get('workers')
+        server = grpc.server(futures.ThreadPoolExecutor(max_workers=workers),
                              interceptors=interceptors)
 
         service_data = autodiscover_grpc_service(installed_apps)
@@ -68,6 +77,12 @@ class Command(BaseCommand):
                     continue
                 if issubclass(cls, data.get('class')):
                     log.info('rpc: %s.%s' % (cls.__module__, cls.__name__))
+                    # 动态设置rpc function
+                    for attr in dir(cls):
+                        if not attr.startswith('__') or\
+                                not attr.startswith('_'):
+                            setattr(cls, attr,
+                                    close_old_connections(getattr(cls, attr)))
                     data.get('server')(cls(), server)
         addrport = options.get('addrport')
         addrport = addrport if addrport else '[::]:50051'
